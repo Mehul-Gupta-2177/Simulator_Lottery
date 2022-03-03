@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Lottery Simulator</title>
+    <style type="text/css">
+        h1{
+            text-align: center;
+            font-size: x-large;
+            color: crimson;
+            font-family: fantasy;
+        }
+        p{
+            text-align: center;
+            font-size: larger;
+            color: blue;
+            font-family: fantasy;
+        }
+        
+        #payout {
+            font-size: x-large;
+            color: red;
+            font-size: xx-large;
+            }
+
+
+    </style>
+    </head>
+
+    <body>
+        <h1>
+            Hi! Welcome to The lottery Simulator
+        </h1>
+        <p>Your Pick Before Sorting</p>
+        <p id="before"></p>
+        <p>Your Pick After Sorting</p>
+        <p id="after"></p>
+        <p>The lucky ball value</p>
+        <p id="lucky"></p>
+        <p>The winning numbers and winning lucky ball </p>
+        <p id="winning"></p>
+        <p>How many of the "pick" matched the winning numbers </p>
+        <p id="match"></p>
+        <p> the lucky ball matched </p>
+        <p id="lucky_match"></p>
+        <p> What the payout would be for your pick </p>
+        <p id="payout"></p>
+
+    </body>
+        <script language="javascript">
+            const pick_array = [];
+            pick_array[0] = Math.floor((Math.random() * 48) + 1);
+            pick_array[1] = Math.floor((Math.random() * 48) + 1);
+            pick_array[2] = Math.floor((Math.random() * 48) + 1);
+            pick_array[3] = Math.floor((Math.random() * 48) + 1);
+            pick_array[4] = Math.floor((Math.random() * 48) + 1);
+
+            document.getElementById("before").innerHTML = pick_array.toString(); 
+            
+            pick_array.sort(function(a, b){return a - b});
+
+            document.getElementById("after").innerHTML = pick_array.toString(); 
+
+            var lucky_ball = Math.floor((Math.random() * 18) + 1);
+
+            document.getElementById("lucky").innerHTML = lucky_ball.toString(); 
+            // 12 15 24 35 48 3
+            const win_array = [];
+            win_array[0] = 12;
+            win_array[1] = 15;
+            win_array[2] = 24;
+            win_array[3] = 35;
+            win_array[4] = 48;
+            win_array[5] = 3;
+
+            document.getElementById("winning").innerHTML = win_array.toString(); 
+
+            var counter = 0;
+            var lucky_match = "no";
+            for (let i = 0; i < 5 ; i++) { 
+                if(win_array[i] == pick_array[i])
+                {
+                    counter = counter + 1;
+                }
+            }
+
+            document.getElementById("match").innerHTML = counter; 
+
+            if(lucky_ball == win_array[5])
+            {
+                lucky_match = "yes";
+            }
+
+            document.getElementById("lucky_match").innerHTML = lucky_match;
+            var payout = "$0"
+            if(counter == 5)
+            {
+                if(lucky_match === "yes")
+                {
+                    payout = "$7,000 a WEEK for LIFE";
+                }
+                else
+                {
+                    payout = "$25,000 a YEAR for LIFE";
+                }
+            }
+            else if (counter == 4) 
+            {
+                if(lucky_match === "yes")
+                {   
+                    payout = "$5,000";
+                }
+                else
+                {
+                    payout = "$200";
+                }
+            }
+            else if (counter == 3) 
+            {
+                if(lucky_match === "yes")
+                {
+                    payout = "$150";
+                }
+                else
+                {
+                    payout = "$20";
+                }
+            }
+            else if (counter == 2) 
+            {
+                if(lucky_match === "yes")
+                {
+                    payout = "$25";
+                }
+                else
+                {
+                    payout = "$3";
+                }
+            }
+            else if(counter == 1)
+            {
+                if(lucky_match === "yes")
+                {
+                    payout = "$6";
+                }
+                else
+                {
+                    payout = "$0";
+                }
+            }
+            else
+            {
+                if(lucky_match === "yes")
+                {
+                    payout = "$4";
+                }
+                else
+                {
+                    payout = "$0";
+                }
+            }
+
+            document.getElementById("payout").innerHTML = payout.toString();
+
+        </script>
+</html>
